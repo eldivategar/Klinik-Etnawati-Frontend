@@ -33,7 +33,8 @@ module.exports = defineConfig({
           options.compilerOptions = {};
         }
         // Add isCustomElement option
-        options.compilerOptions.isCustomElement = (tag) => tag === "marquee";
+        options.compilerOptions.isCustomElement = (tag) =>
+          tag === "marquee" || tag === "l-cardio";
         return options;
       });
 

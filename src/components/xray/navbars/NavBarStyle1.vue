@@ -33,10 +33,11 @@
         </div> -->
         <div class="marquee-container px-2">
           <marquee direction="left" class="marquee-text"
-            >Selamat datang di Admin Panel</marquee
-          >
+            >Selamat datang <span v-if="user.role === 'doctor'">Dr. </span>
+            {{ user.detail.fullname }}
+          </marquee>
         </div>
-        <b-navbar-toggle target="nav">
+        <b-navbar-toggle target="nav-collapse">
           <i class="ri-menu-3-line"></i>
         </b-navbar-toggle>
         <div class="iq-menu-bt align-self-center">
@@ -57,6 +58,9 @@
 <script>
 import List from "../menus/ListStyle1";
 import SideBarItems from "../../../FackApi/json/SideBar";
+import { useUserStore } from "../../../store/pinia/User";
+import { onMounted } from "vue";
+import { computed } from "vue";
 export default {
   name: "NavBarStyle1",
   props: {
@@ -80,6 +84,17 @@ export default {
       showSearch: false,
       showMenu: false,
     };
+  },
+  setup() {
+    const userStore = useUserStore();
+    const user = computed(() => userStore.user);
+
+    onMounted(async () => {
+      if (!userStore.user) {
+        await userStore.fetchUserData();
+      }
+    });
+    return { user };
   },
   methods: {
     miniSidebar() {

@@ -1,108 +1,44 @@
 import { createRouter, createWebHistory } from "vue-router";
 /* Layouts */
 import Layout1 from "../layouts/Layout1.vue";
-// import Default from "../layouts/BlankLayout";
 import AuthLayout1 from "../layouts/AuthLayouts/AuthLayout1";
 
-/* Dashboards View */
-import Dashboard1 from "../views/Dashboards/Dashboard1.vue";
-import Dashboard2 from "../views/Dashboards/Dashboard2.vue";
-// import Dashboard3 from "../views/Dashboards/Dashboard3";
-// import Dashboard4 from "../views/Dashboards/Dashboard4";
-// import Dashboard5 from "../views/Dashboards/Dashboard5.vue";
-
-/* UIElements View */
-// import UiAlerts from "../views/core/UiAlerts.vue";
-// import UiButtons from "../views/core/UiButtons.vue";
-// import UiBadges from "../views/core/UiBadges.vue";
-// import UiBreadcrumb from "../views/core/UiBreadcrumb.vue";
-// import UiColors from "../views/core/UiColors.vue";
-// import UiTypography from "../views/core/UiTypography.vue";
-// import UiCards from "../views/core/UiCards.vue";
-// import UiCarousel from "../views/core/UiCarousel.vue";
-// import UiEmbedVideo from "../views/core/UiEmbedVideo.vue";
-// import UiGrid from "../views/core/UiGrid.vue";
-// import UiModal from "../views/core/UiModal.vue";
-// import UiListGroup from "../views/core/UiListGroup.vue";
-// import UiImages from "../views/core/UiImages.vue";
-// import UiMediaObject from "../views/core/UiMediaObject.vue";
-// import UiTooltips from "../views/core/UiTooltips.vue";
-// import UiPopovers from "../views/core/UiPopovers.vue";
-// import UiNotifications from "../views/core/UiNotifications.vue";
-// import UiTabs from "../views/core/UiTabs.vue";
-// import UiPagination from "../views/core/UiPagination.vue";
-// import UiProgressBars from "../views/core/UiProgressBars.vue";
 /* Authentic View */
 import SignIn1 from "../views/AuthPages/Default/SignIn1";
-// import SignUp1 from "../views/AuthPages/Default/SignUp1";
-// import RecoverPassword1 from "../views/AuthPages/Default/RecoverPassword1";
-// import LockScreen1 from "../views/AuthPages/Default/LockScreen1";
-// import ConfirmMail1 from "../views/AuthPages/Default/ConfirmMail1";
-/* Extra Pages */
-// import ErrorPage from "../views/Pages/ErrorPage";
-// import ComingSoon from "../views/Pages/ComingSoon";
-// import Maintenance from "../views/Pages/Maintenance";
-// import TimeLine from "../views/Pages/TimeLines";
-// import Pricing from "../views/Pages/Pricing";
-// import Pricing1 from "../views/Pages/Pricing1";
 import BlankPage from "../views/Pages/BlankPage";
-// import FAQ from "../views/Pages/FAQ";
 import Invoice from "../views/Pages/Invoice";
-/* Apps Views */
-// import EmailListing from "../views/Apps/Email/EmailListing";
-// import EmailCompose from "../views/Apps/Email/EmailCompose";
-// import Calendar from "../views/Apps/Calendar/Calendar";
-// import ChatIndex from "../views/Apps/Chat/Index";
-/* Icon Views */
-// import IconDripicons from "../views/Icons/IconDripicons";
-// import IconFontawesome5 from "../views/Icons/IconFontawesome5";
-// import IconLineAwesome from "../views/Icons/IconLineAwesome";
-// import IconRemixicon from "../views/Icons/IconRemixicon";
-// import IconUnicons from "../views/Icons/IconUnicons";
-/* Tables Views */
-// import TablesBasic from "../views/Tables/TablesBasic";
-// import DataTable from "../views/Tables/DataTable";
-// import EditableTable from "../views/Tables/EditableTable";
-// import ApexCharts from "../views/Charts/ApexCharts";
-// import AmCharts from "../views/Charts/AmCharts";
-// import ChartJS from "../views/Charts/ChartJS.vue";
-// import Echart from "../views/Charts/EChart.vue";
-// import GoogleMaps from "../views/Maps/GoogleMaps";
-// import VectorMaps from "../views/Maps/VectorMaps";
-/* Form View */
-// import FormLayout from "../views/Forms/FormLayout";
-// import FormValidates from "../views/Forms/FormValidates";
-// import FormSwitches from "../views/Forms/FormSwitches";
-// import FormRadios from "../views/Forms/FormRadios";
-// import FormCheckboxes from "../views/Forms/FormCheckboxes";
 /* User View */
 import Profile from "../views/User/Profile";
 import ProfileEdit from "../views/User/ProfileEdit";
-import AddUser from "../views/User/AddUser";
+// import AddUser from "../views/User/AddUser";`
 import UserList from "../views/User/UserList";
-/* Plugins Views */
-// import DatepickerDemo from "../views/Plugins/DatepickerDemo";
-// import SelectDemo from "../views/Plugins/SelectDemo";
-// import DragDropDemo from "../views/Plugins/DragDropDemo";
-// import AppTreeView from "../views/Plugins/AppTreeView";
 
-// Form Wizard
-// import SimpleWizard from "../views/FormWizard/SimpleWizard.vue";
-// import ValidateWizard from "../views/FormWizard/ValidateWizard.vue";
-// import VerticalWizard from "../views/FormWizard/VerticalWizard.vue";
+/* Store */
+import { useAuthStore } from "../store/pinia/Auth";
 
-import { useAuthStore } from "../store/pinia/authStore";
+/* Dashboard Views */
+import Dashboard from "../views/Dashboards/Dashboard";
 
-import moment from "moment";
+/* Medical Record Views */
+import ListMedicalRecord from "../views/MedicalRecord/ListMedicalRecord";
+import AddMedicalRecord from "../views/MedicalRecord/AddMedicalRecord";
 
-// Vue.use(VueRouter)
+/* Doctors Views */
+import Schedule from "../views/Managements/Doctors/Schedule";
+import DoctorList from "../views/Managements/Doctors/DoctorList";
+import AddDoctor from "../views/Managements/Doctors/AddDoctor";
+import DoctorProfile from "../views/Managements/Doctors/DoctorProfile";
+
+/* Patients Views */
+import PatientList from "../views/Managements/Patients/PatientList";
+import PatientRegistration from "../views/Managements/Patients/PatientRegistration";
 
 const childRoutes = (prop, mode) => [
   {
     path: "",
     name: prop + ".home-1",
     meta: { dark: mode, auth: true, name: "Home 1" },
-    component: Dashboard1,
+    component: Dashboard,
   },
 ];
 const medrecChildRoute = (prop, mode) => [
@@ -110,7 +46,13 @@ const medrecChildRoute = (prop, mode) => [
     path: "",
     name: prop + ".record",
     meta: { dark: mode, auth: true, name: "Medical Record" },
-    component: Dashboard2,
+    component: ListMedicalRecord,
+  },
+  {
+    path: "add",
+    name: prop + ".record.add",
+    meta: { dark: mode, auth: true, name: "Add Medical Record" },
+    component: AddMedicalRecord,
   },
 ];
 const transactionChildRoute = (prop, mode) => [
@@ -169,12 +111,6 @@ const userChildRoute = (prop, mode = false) => [
     component: ProfileEdit,
   },
   {
-    path: "add-user",
-    name: prop + ".add",
-    meta: { dark: mode, auth: true, name: "Add Profile" },
-    component: AddUser,
-  },
-  {
     path: "user-list",
     name: prop + ".list",
     meta: { dark: mode, auth: true, name: "User List" },
@@ -182,21 +118,49 @@ const userChildRoute = (prop, mode = false) => [
   },
   {
     path: "doctor",
-    name: prop + ".doctor",
-    meta: { dark: mode, auth: true, name: "Doctor" },
-    component: UserList,
+    children: [
+      {
+        path: "",
+        name: prop + ".doctor",
+        meta: { dark: mode, auth: true, name: "Doctor List" },
+        component: DoctorList,
+      },
+      {
+        path: "add",
+        name: prop + ".doctor.add",
+        meta: { dark: mode, auth: true, name: "Add Doctor" },
+        component: AddDoctor,
+      },
+      {
+        path: "schedule",
+        name: prop + ".doctor.schedule",
+        meta: { dark: mode, auth: true, name: "Doctor Schedule" },
+        component: Schedule,
+      },
+      {
+        path: ":user_id/:date_joined",
+        name: prop + ".doctor.profile",
+        meta: { dark: mode, auth: true, name: "Doctor Profile" },
+        component: DoctorProfile,
+      },
+    ],
   },
   {
     path: "patient",
-    name: prop + ".patient",
-    meta: { dark: mode, auth: true, name: "Patient" },
-    component: UserList,
-  },
-  {
-    path: "nurse",
-    name: prop + ".nurse",
-    meta: { dark: mode, auth: true, name: "Nurse" },
-    component: UserList,
+    children: [
+      {
+        path: "",
+        name: prop + ".patient",
+        meta: { dark: mode, auth: true, name: "Patient List" },
+        component: PatientList,
+      },
+      {
+        path: "registration",
+        name: prop + ".patient.registration",
+        meta: { dark: mode, auth: true, name: "Patient Registration" },
+        component: PatientRegistration,
+      },
+    ],
   },
 ];
 
@@ -253,31 +217,14 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   const authStore = useAuthStore();
-  try {
-    const userData = JSON.parse(localStorage.getItem("user"));
+  const isAuthenticated = authStore.isAuthenticated;
 
-    if (userData) {
-      const expiresAt = moment(userData.expired_at);
-      if (expiresAt.isAfter(moment())) {
-        authStore.setAuthData(userData.token, userData.expired_at);
-      } else {
-        authStore.clearAuthData();
-      }
-    } else {
-      authStore.clearAuthData();
-    }
-
-    if (to.meta.auth && !authStore.isAuthenticated) {
-      next("/auth/login");
-    } else if (!to.meta.auth && authStore.isAuthenticated) {
-      next("/");
-    } else {
-      next();
-    }
-  } catch (error) {
-    console.error("Error during authentication check:", error);
-    authStore.clearAuthData();
+  if (to.meta.auth && !isAuthenticated) {
     next("/auth/login");
+  } else if (!to.meta.auth && isAuthenticated) {
+    next("/");
+  } else {
+    next();
   }
 });
 

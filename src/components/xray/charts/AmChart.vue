@@ -20,81 +20,113 @@ export default {
     option: { type: (Object, Array), default: () => {} },
     height: { type: Number, default: 500 },
   },
+  watch: {
+    option() {
+      if (this.chart) {
+        this.chart.dispose();
+      }
+      this.initChart();
+    },
+  },
   mounted() {
-    let chart;
-    switch (this.type) {
-      case "line":
-        chart = am4core.create(this.element, am4charts.XYChart);
-        this.line(chart);
-        break;
-      case "column":
-        chart = am4core.create(this.element, am4charts.XYChart);
-        this.column(chart);
-        break;
-      case "mixes-column":
-        chart = am4core.create(this.element, am4charts.XYChart);
-        this.mixesColumn(chart);
-        break;
-      case "stacked":
-        chart = am4core.create(this.element, am4charts.XYChart);
-        this.stacked(chart);
-        break;
-      case "bar-line":
-        chart = am4core.create(this.element, am4charts.XYChart);
-        this.barLine(chart);
-        break;
-      case "data-based":
-        chart = am4core.create(this.element, am4charts.XYChart);
-        this.dataBased(chart);
-        break;
-      case "line-zoom-h":
-        chart = am4core.create(this.element, am4charts.XYChart);
-        this.lineZoomH(chart);
-        break;
-      case "line-zoom-v":
-        chart = am4core.create(this.element, am4charts.XYChart);
-        this.lineZoomV(chart);
-        break;
-      case "radar":
-        chart = am4core.create(this.element, am4charts.RadarChart);
-        this.radar(chart);
-        break;
-      case "polar-scatter":
-        chart = am4core.create(this.element, am4charts.RadarChart);
-        this.polarScatter(chart);
-        break;
-      case "polar":
-        chart = am4core.create(this.element, am4charts.RadarChart);
-        this.polar(chart);
-        break;
-      case "pie":
-        chart = am4core.create(this.element, am4charts.PieChart3D);
-        this.pie(chart);
-        break;
-      case "line-bar":
-        chart = am4core.create(this.element, am4charts.XYChart);
-        this.lineBar(chart);
-        break;
-      case "dashboard-map":
-        this.map(chart);
-        break;
-      case "dashboard2":
-        chart = am4core.create(this.element, am4charts.XYChart);
-        this.linierChart(chart);
-        break;
-      case "radial-pie":
-        chart = am4core.create(this.element, am4charts.PieChart);
-        this.radialPieChart(chart);
-        break;
-      case "dash-3":
-        chart = am4core.create(this.element, am4charts.RadarChart);
-        this.dash3(chart);
-        break;
-      default:
-        break;
+    this.initChart();
+  },
+  beforeUnmount() {
+    if (this.chart) {
+      this.chart.dispose();
     }
   },
   methods: {
+    initChart() {
+      let chart;
+      switch (this.type) {
+        case "line":
+          chart = am4core.create(this.element, am4charts.XYChart);
+          this.chart = chart;
+          this.line(chart);
+          break;
+        case "column":
+          chart = am4core.create(this.element, am4charts.XYChart);
+          this.chart = chart;
+          this.column(chart);
+          break;
+        case "mixes-column":
+          chart = am4core.create(this.element, am4charts.XYChart);
+          this.chart = chart;
+          this.mixesColumn(chart);
+          break;
+        case "stacked":
+          chart = am4core.create(this.element, am4charts.XYChart);
+          this.chart = chart;
+          this.stacked(chart);
+          break;
+        case "bar-line":
+          chart = am4core.create(this.element, am4charts.XYChart);
+          this.chart = chart;
+          this.barLine(chart);
+          break;
+        case "data-based":
+          chart = am4core.create(this.element, am4charts.XYChart);
+          this.chart = chart;
+          this.dataBased(chart);
+          break;
+        case "line-zoom-h":
+          chart = am4core.create(this.element, am4charts.XYChart);
+          this.chart = chart;
+          this.lineZoomH(chart);
+          break;
+        case "line-zoom-v":
+          chart = am4core.create(this.element, am4charts.XYChart);
+          this.chart = chart;
+          this.lineZoomV(chart);
+          break;
+        case "radar":
+          chart = am4core.create(this.element, am4charts.RadarChart);
+          this.chart = chart;
+          this.radar(chart);
+          break;
+        case "polar-scatter":
+          chart = am4core.create(this.element, am4charts.RadarChart);
+          this.chart = chart;
+          this.polarScatter(chart);
+          break;
+        case "polar":
+          chart = am4core.create(this.element, am4charts.RadarChart);
+          this.chart = chart;
+          this.polar(chart);
+          break;
+        case "pie":
+          chart = am4core.create(this.element, am4charts.PieChart3D);
+          this.chart = chart;
+          this.pie(chart);
+          break;
+        case "line-bar":
+          chart = am4core.create(this.element, am4charts.XYChart);
+          this.chart = chart;
+          this.lineBar(chart);
+          break;
+        case "dashboard-map":
+          this.map(chart);
+          break;
+        case "dashboard2":
+          chart = am4core.create(this.element, am4charts.XYChart);
+          this.chart = chart;
+          this.linierChart(chart);
+          break;
+        case "radial-pie":
+          chart = am4core.create(this.element, am4charts.PieChart);
+          this.chart = chart;
+          this.radialPieChart(chart);
+          break;
+        case "dash-3":
+          chart = am4core.create(this.element, am4charts.RadarChart);
+          this.chart = chart;
+          this.dash3(chart);
+          break;
+        default:
+          break;
+      }
+    },
     line(chart) {
       chart.colors.list = [];
       for (let j = 0; j < this.option.colors.length; j++) {
@@ -979,13 +1011,39 @@ export default {
       chart.endAngle = 360;
       var series = chart.series.push(new am4charts.PieSeries());
       series.dataFields.value = "value";
-      series.dataFields.category = "country";
-      series.colors.list = [
-        am4core.color("#089bab"),
-        am4core.color("#2ca5b2"),
-        am4core.color("#faa264"),
-        am4core.color("#fcb07a"),
-      ];
+      series.dataFields.category = "category";
+
+      // Gaya untuk label kategori
+      series.labels.template.fontWeight = "bold"; // Huruf tebal untuk label kategori
+      series.labels.template.fill = am4core.color("#000000"); // Warna teks label kategori
+
+      // Gaya untuk label nilai
+      series.labels.template.adapter.add("text", function (text, target) {
+        if (target.dataItem && target.dataItem.value) {
+          let valueText = target.dataItem.value;
+          let categoryText = target.dataItem.category;
+          return categoryText + " -" + " (" + valueText + ")";
+        }
+        return text;
+      });
+
+      series.labels.template.adapter.add(
+        "fontWeight",
+        function (fontWeight, target) {
+          // Gaya untuk label kategori tetap bold
+          if (target.dataItem && target.dataItem.category) {
+            return "bold";
+          }
+          return fontWeight; // Gaya default untuk nilai
+        }
+      );
+
+      // series.colors.list = [
+      //   am4core.color("#089bab"),
+      //   am4core.color("#2ca5b2"),
+      //   am4core.color("#faa264"),
+      //   am4core.color("#fcb07a"),
+      // ];
 
       series.slices.template.cornerRadius = 0;
       series.slices.template.innerCornerRadius = 0;
@@ -999,56 +1057,56 @@ export default {
       chart.legend = new am4charts.Legend();
     },
     dash3(chart) {
-      chart.data = [
-        {
-          country: "USA",
-          visits: 2025,
-        },
-        {
-          country: "China",
-          visits: 1882,
-        },
-        {
-          country: "Japan",
-          visits: 1809,
-        },
-        {
-          country: "Germany",
-          visits: 1322,
-        },
-        {
-          country: "UK",
-          visits: 1122,
-        },
-        {
-          country: "France",
-          visits: 1114,
-        },
-        {
-          country: "India",
-          visits: 984,
-        },
-        {
-          country: "Spain",
-          visits: 711,
-        },
-        {
-          country: "Netherlands",
-          visits: 665,
-        },
-        {
-          country: "Russia",
-          visits: 580,
-        },
-        {
-          country: "South Korea",
-          visits: 443,
-        },
-        {
-          country: "Canada",
-          visits: 441,
-        },
-      ];
+      // chart.data = [
+      //   {
+      //     country: "USA",
+      //     visits: 2025,
+      //   },
+      //   {
+      //     country: "China",
+      //     visits: 1882,
+      //   },
+      //   {
+      //     country: "Japan",
+      //     visits: 1809,
+      //   },
+      //   {
+      //     country: "Germany",
+      //     visits: 1322,
+      //   },
+      //   {
+      //     country: "UK",
+      //     visits: 1122,
+      //   },
+      //   {
+      //     country: "France",
+      //     visits: 1114,
+      //   },
+      //   {
+      //     country: "India",
+      //     visits: 984,
+      //   },
+      //   {
+      //     country: "Spain",
+      //     visits: 711,
+      //   },
+      //   {
+      //     country: "Netherlands",
+      //     visits: 665,
+      //   },
+      //   {
+      //     country: "Russia",
+      //     visits: 580,
+      //   },
+      //   {
+      //     country: "South Korea",
+      //     visits: 443,
+      //   },
+      //   {
+      //     country: "Canada",
+      //     visits: 441,
+      //   },
+      // ];
 
       chart.innerRadius = am4core.percent(40);
 

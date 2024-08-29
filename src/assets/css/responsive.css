@@ -987,6 +987,7 @@ NOTE: This file contains the styling for responsive Template.
 
 	.marquee-text {
 		font-size: 1rem;
+		width: 100%;
 	}
 }
 
@@ -994,8 +995,9 @@ NOTE: This file contains the styling for responsive Template.
 	.marquee-container {
 		top: 5px;
 	}
-
+	
 	.marquee-text {
 		font-size: 1.1rem;
+		width: 100%;
 	}
 }

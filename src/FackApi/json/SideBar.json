@@ -60,39 +60,68 @@
     "name": "sidebar.doctor",
     "is_heading": false,
     "is_active": false,
-    "link": {
-      "name": "user.doctor"
-    },
+    "link": "",
     "class_name": "",
     "is_icon_class": true,
     "icon": "ri-stethoscope-fill",
-    "badge" : false
+    "children": [
+      {
+        "title": "Doctor List",
+        "name": "sidebar.doctorList",
+        "is_active": false,
+        "link": {
+          "name": "user.doctor"
+        },
+        "class_name": "",
+        "is_icon_class": true,
+        "icon": "ri-user-fill"
+      },
+      {
+        "title": "Doctor Schedule",
+        "name": "sidebar.doctorSchedule",
+        "is_active": false,
+        "link": {
+          "name": "user.doctor.schedule"
+        },
+        "class_name": "",
+        "is_icon_class": true,
+        "icon": "ri-calendar-todo-fill"
+      }
+    ]
   },
   {
     "title": "Patient",
     "name": "sidebar.patient",
     "is_heading": false,
     "is_active": false,
-    "link": {
-      "name": "user.patient"
-    },
+    "link": "",
     "class_name": "",
     "is_icon_class": true,
     "icon": "ri-empathize-fill",
-    "badge" : false
-  },
-  {
-    "title": "Nurse",
-    "name": "sidebar.nurse",
-    "is_heading": false,
-    "is_active": false,
-    "link": {
-      "name": "user.nurse"
-    },
-    "class_name": "",
-    "is_icon_class": true,
-    "icon": "ri-nurse-fill",
-    "badge" : false
+    "children": [
+      {
+        "title": "Patient List",
+        "name": "sidebar.patientList",
+        "is_active": false,
+        "link": {
+          "name": "user.patient"
+        },
+        "class_name": "",
+        "is_icon_class": true,
+        "icon": "ri-user-fill"
+      },
+      {
+        "title": "Patient Registration",
+        "name": "sidebar.patientRegistration",
+        "is_active": false,
+        "link": {
+          "name": "user.patient.registration"
+        },
+        "class_name": "",
+        "is_icon_class": true,
+        "icon": "ri-user-add-fill"
+      }
+    ]
   },
   {
     "title": "Transaction",

@@ -6,10 +6,10 @@
       :class="
         item.is_heading
           ? 'iq-menu-title'
-          : activeLink(item) && item.children
-          ? 'active menu-open'
           : activeLink(item)
-          ? 'active'
+          ? item.children
+            ? 'active menu-open'
+            : 'active'
           : ''
       "
     >

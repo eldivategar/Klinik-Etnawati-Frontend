@@ -7,7 +7,10 @@
     "medrec1": "Rekam Medis",
     "management": "Manajemen Data",
     "doctor": "Dokter",
+    "doctorSchedule": "Jadwal",
     "patient": "Pasien",
+    "patientList": "List Pasien",
+    "patientRegistration": "Registrasi",
     "nurse": "Perawat",
     "transaction": "Transaksi",
     "payment": "Kwitansi",
@@ -32,7 +35,7 @@
     "doctorProfile": "Doctor Profile",
     "doctorEdit": "Edit Doctor",
     "doctorAdd": "Add Doctor",
-    "doctorList": "All Doctors",
+    "doctorList": "List Dokter",
     "components": "Components",
     "uiElements": "UI Elements",
     "color": "Colors",
@@ -116,15 +119,15 @@
     "viewCarts": "View Carts",
     "user": {
       "available": "Available",
-      "profileTitle": "My Profile",
-      "profileSub": "View personal profile details.",
+      "profileTitle": "Profile saya",
+      "profileSub": "Kelola profil Anda.",
       "profileEditTitle": "Edit Profile",
       "profileEditSub": "Modify your personal details.",
       "accountSettingTitle": "Account Setting",
       "accountSettingSub": "Manage your account parameters.",
       "privacySettingTitle": "Privacy Setting",
       "privacySettingSub": "Control your privacy parameters.",
-      "signout": "Sign Out"
+      "signout": "Keluar"
     }
   },
   "dashboard2": {

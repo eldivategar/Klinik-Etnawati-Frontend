@@ -70,8 +70,7 @@
 </template>
 
 <script>
-import instance from "../../../../axios";
-import { useAuthStore } from "../../../../store/pinia/authStore";
+import { useAuthStore } from "../../../../store/pinia/Auth";
 export default {
   name: "SignIn1Form",
   props: ["username", "password"],
@@ -124,15 +123,13 @@ export default {
         return;
       }
       this.loading = true;
-      try {
-        const response = await instance.post("/account/auth/login", this.user);
-        const { token, expired_at } = response.data;
-        authStore.setAuthData(token, expired_at);
-        this.$router.push({ name: "dashboard.home-1" });
-      } catch (error) {
-        this.loading = false;
-        alert(error.response.data.message);
-      }
+      await authStore.login(
+        this.user.username,
+        this.user.password,
+        this.user.rememberMe
+      );
+      this.loading = false;
+      this.$router.push({ name: "dashboard.home-1" });
     },
   },
 };

@@ -344,15 +344,15 @@ export const xray = {
   getActiveLink(item, activeRoute) {
     let active = false;
     if (item.children !== undefined) {
-      item.children.filter(function (child) {
-        if (child.link.name === activeRoute) {
+      item.children.forEach((child) => {
+        if (this.getActiveLink(child, activeRoute)) {
           active = true;
         }
       });
-    } else {
-      if (item.link.name === activeRoute) {
-        active = true;
-      }
+    } else if (item.link.name === activeRoute) {
+      active = true;
+    } else if (activeRoute.startsWith(item.link.name)) {
+      active = true;
     }
     return active;
   },
